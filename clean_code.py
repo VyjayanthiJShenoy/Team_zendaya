@@ -86,13 +86,13 @@ def cloude(disease_p):
     print(details.get())
     print(doctor_name.get())
 
-    if doctor_name is 'Rahul' :
-        email_id ='beinguniqe2000@gmail.com'
-    elif doctor_name is 'Sreenidhi' :
+    if doctor_name.get() == 'Rahul' :
+        email_id ='beingunique2000@gmail.com'
+    elif doctor_name.get() == 'Sreenidhi' :
         email_id ='sreenidhishreya@gmail.com'
-    elif doctor_name is 'Neha' :
+    elif doctor_name.get() == 'Neha' :
         email_id ='nehavrindavan@gmail.com'
-    elif doctor_name is 'Ashwin' :
+    elif doctor_name.get() == 'Ashwin' :
         email_id='ashwincsuresh@gmail.com'
     else :
         email_id='vyju.j.s@gmail.com'
@@ -106,11 +106,14 @@ def cloude(disease_p):
         smtp.login('rahulraghuk@gmail.com','areuready')
 
         subject="MEDICAL REPORT OF "+ Name.get()
-        body="DEAR DOC,\n\n The mediacl report of pateint\n\n"+Name.get()+" " +str(age.get())+"\n\n with Syptoms\n\n"+ Symptom1.get()+" " + Symptom2.get()+" "+Symptom3.get() +"\n\n\n possible disease :" + disease_p +"\n\n\n please dont reply"
+        body="DEAR DOC,\n\n The mediacl report of pateint\n\n"+Name.get()+"     \nage:" +str(age.get())+"\n\n with Syptoms\n\n"+ Symptom1.get()+" , " + Symptom2.get()+" , "+Symptom3.get() +"\n\n\n possible disease :" + disease_p +"\n\n\n additional details from patient : "+ details.get() +"\n\n\n please dont reply"
 
         msg=f'subject: {subject}\n\n{body}'
 
         smtp.sendmail('rahulraghuk@gmail.com',email_id,msg)
+
+def vital():
+    oxylvl=0
 
 
 
@@ -197,6 +200,23 @@ w6.grid(row=9, column=1, columnspan=2, padx=100)
 w7 = Label(root,  text="choose symptoms", fg="white", bg="green")
 w7.config(font=("Aharoni", 10))
 w7.grid(row=13, column=1, columnspan=2, padx=100)
+
+
+w8 = Label(root,  text="vitals:", fg="white", bg="green")
+w8.config(font=("Aharoni", 10))
+w8.grid(row=9, column=2, columnspan=2, padx=100)
+
+w9 = Label(root,  text=" bloode oxylevel :"+ str(0), fg="white", bg="green")
+w9.config(font=("Aharoni", 10))
+w9.grid(row=10, column=2, columnspan=2, padx=100)
+
+w10 = Label(root,  text=" temp :"+ str(0), fg="white", bg="green")
+w10.config(font=("Aharoni", 10))
+w10.grid(row=11, column=2, columnspan=2, padx=100)
+
+w11 = Label(root,  text=" heartrate :"+ str(0), fg="white", bg="green")
+w11.config(font=("Aharoni", 10))
+w11.grid(row=12, column=2, columnspan=2, padx=100)
 
 # labels
 NameLb = Label(root, text="Name :", fg="black", bg="green")
