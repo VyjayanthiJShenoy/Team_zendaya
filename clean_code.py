@@ -85,6 +85,7 @@ def cloude(disease_p):
     print(number.get())
     print(details.get())
     print(doctor_name.get())
+    print(resprate.get())
 
     if doctor_name.get() == 'Rahul' :
         email_id ='beingunique2000@gmail.com'
@@ -106,7 +107,7 @@ def cloude(disease_p):
         smtp.login('rahulraghuk@gmail.com','areuready')
 
         subject="MEDICAL REPORT OF "+ Name.get()
-        body="DEAR DOC,\n\n The mediacl report of pateint\n\n"+Name.get()+"     \nage:" +str(age.get())+"\n\n with Syptoms\n\n"+ Symptom1.get()+" , " + Symptom2.get()+" , "+Symptom3.get() +"\n\n\n possible disease :" + disease_p +"\n\n\n additional details from patient : "+ details.get() +"\n\n\n please dont reply"
+        body="DEAR DOC,\n\n The mediacl report of pateint\n\n"+Name.get()+"     \nage:" +str(age.get())+ "\ncontact no: "+ str(number.get())+"\n\n with Syptoms\n\n"+ Symptom1.get()+" , " + Symptom2.get()+" , "+Symptom3.get()+"\n\n vital readings --->\n\n temp:no reading\nblood oxy: no reading\n heart rate: no reading \n respiratory rate:  "+str(resprate.get()) +"\n\n\n possible disease :" + disease_p +"\n\n\n additional details from patient : "+ details.get() +"\n\n\n please dont reply"
 
         msg=f'subject: {subject}\n\n{body}'
 
@@ -180,6 +181,7 @@ doctor_name.set(None)
 age=IntVar()
 number=StringVar()
 details=StringVar()
+resprate=IntVar()
 
 # Heading
 w2 = Label(root, justify=LEFT, text="Team Zendaya", fg="white", bg="green")
@@ -218,14 +220,18 @@ w11 = Label(root,  text=" heartrate :"+ str(0), fg="white", bg="green")
 w11.config(font=("Aharoni", 10))
 w11.grid(row=12, column=2, columnspan=2, padx=100)
 
+w12 = Label(root,  text=" manual vital---> respiration rate:", fg="white", bg="green")
+w12.config(font=("Aharoni", 10))
+w12.grid(row=14, column=2, columnspan=2, padx=100)
+
 # labels
 NameLb = Label(root, text="Name :", fg="black", bg="green")
 NameLb.grid(row=7, column=0, pady=10, sticky=W)
 ageLb = Label(root, text="Age", fg="black", bg="green")
-ageLb.grid(row=7, column=1, pady=10, sticky=W)
+ageLb.grid(row=7, column=1)
 
 numLb = Label(root, text="contact no:", fg="black", bg="green")
-numLb.grid(row=7, column=2, pady=10, sticky=W)
+numLb.grid(row=7, column=3, )
 
 
 S1Lb = Label(root, text="Symptom 1", fg="yellow", bg="green")
@@ -257,13 +263,13 @@ lrLb.grid(row=22, column=0, pady=10,sticky=W)
 OPTIONS = sorted(l1)
 
 NameEn = Entry(root, textvariable=Name)
-NameEn.grid(row=8, column=0,)
+NameEn.grid(row=8, column=0)
 
 ageEn = Entry(root, textvariable=age)
-ageEn.grid(row=7, column=1)
+ageEn.grid(row=8, column=1)
 
 numEn = Entry(root, textvariable=number)
-numEn.grid(row=7, column=3)
+numEn.grid(row=8, column=3)
 
 S1En = OptionMenu(root, Symptom1,*OPTIONS)
 S1En.grid(row=14, column=1)
@@ -273,6 +279,9 @@ S2En.grid(row=15, column=1)
 
 S3En = OptionMenu(root, Symptom3,*OPTIONS)
 S3En.grid(row=16, column=1)
+
+respEn = Entry(root, textvariable=resprate)
+respEn.grid(row=15, column=3,columnspan=5)
 
 #S4En = OptionMenu(root, Symptom4,*OPTIONS)
 #S4En.grid(row=10, column=1)
