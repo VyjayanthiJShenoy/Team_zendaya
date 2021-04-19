@@ -108,7 +108,7 @@ def cloude(disease_p):
         smtp.login('rahulraghuk@gmail.com','areuready')
 
         subject="MEDICAL REPORT OF "+ Name.get()
-        body="DEAR DOC,\n\n The mediacl report of pateint\n\n"+Name.get()+"     \nage:" +str(age.get())+ "\ncontact no: "+ str(number.get())+"\n\n with Syptoms\n\n"+ Symptom1.get()+" , " + Symptom2.get()+" , "+Symptom3.get()+"\n\n vital readings --->\n\n temp:no reading\nblood oxy: no reading\n heart rate: no reading \n respiratory rate:  "+str(resprate.get()) +"\n\n\n possible disease :" + disease_p +"\n\n\n additional details from patient : "+ details.get() +"\n\n\n please dont reply"
+        body="DEAR DOC,\n\n The mediacl report of pateint\n\n"+Name.get()+"     \nage:" +str(age.get())+ "\ncontact no: "+ str(number.get())+"\n\n with Syptoms\n\n"+ Symptom1.get()+" , " + Symptom2.get()+" , "+Symptom3.get()+"\n\n vital readings --->\n\n temp:no reading\nblood oxy: no reading\n heart rate: no reading \n respiratory rate:  "+str(resprate.get()) +" \n Blood pressure : "+ str(bp.get()) +"\n\n\n possible disease :" + disease_p +"\n\n\n additional details from patient : "+ details.get() +"\n\n\n please dont reply"
 
         msg=f'subject: {subject}\n\n{body}'
 
