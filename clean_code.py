@@ -86,6 +86,7 @@ def cloude(disease_p):
     print(details.get())
     print(doctor_name.get())
     print(resprate.get())
+    print(bp.get())
 
     if doctor_name.get() == 'Rahul' :
         email_id ='beingunique2000@gmail.com'
@@ -182,6 +183,7 @@ age=IntVar()
 number=StringVar()
 details=StringVar()
 resprate=IntVar()
+bp=IntVar()
 
 # Heading
 w2 = Label(root, justify=LEFT, text="Team Zendaya", fg="white", bg="green")
@@ -223,6 +225,10 @@ w11.grid(row=12, column=2, columnspan=2, padx=100)
 w12 = Label(root,  text=" manual vital---> respiration rate:", fg="white", bg="green")
 w12.config(font=("Aharoni", 10))
 w12.grid(row=14, column=2, columnspan=2, padx=100)
+
+w12 = Label(root,  text=" manual vital---> Blood Pressure:", fg="white", bg="green")
+w12.config(font=("Aharoni", 10))
+w12.grid(row=16, column=2, columnspan=2, padx=100)
 
 # labels
 NameLb = Label(root, text="Name :", fg="black", bg="green")
@@ -282,6 +288,9 @@ S3En.grid(row=16, column=1)
 
 respEn = Entry(root, textvariable=resprate)
 respEn.grid(row=15, column=3,columnspan=5)
+
+bpEn = Entry(root, textvariable=bp)
+bpEn.grid(row=17, column=3,columnspan=5)
 
 #S4En = OptionMenu(root, Symptom4,*OPTIONS)
 #S4En.grid(row=10, column=1)
