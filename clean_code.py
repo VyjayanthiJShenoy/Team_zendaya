@@ -3,6 +3,8 @@ import numpy as np
 import pandas as pd
 import smtplib
 from tkinter import ttk
+import urllib.request
+import re
 # from gui_stuff import *
 
 l1=['back_pain','constipation','abdominal_pain','diarrhoea','mild_fever','yellow_urine',
@@ -77,6 +79,7 @@ X_test= tr[l1]
 y_test = tr[["prognosis"]]
 np.ravel(y_test)
 # ------------------------------------------------------------------------------------------------------
+
 def cloude(disease_p):
     print(disease_p)
     print([Symptom1.get(),Symptom2.get(),Symptom3.get()])
@@ -88,6 +91,9 @@ def cloude(disease_p):
     print(resprate.get())
     print(bp.get())
 
+    #datafromwebsite=urllib.request.urlopen("https://api.thingspeak.com/channels/526585/fields/1.json?results=1")
+    #print(datafromwebsite.read())
+    
     if doctor_name.get() == 'Rahul' :
         email_id ='beingunique2000@gmail.com'
     elif doctor_name.get() == 'Sreenidhi' :
@@ -108,7 +114,7 @@ def cloude(disease_p):
         smtp.login('rahulraghuk@gmail.com','areuready')
 
         subject="MEDICAL REPORT OF "+ Name.get()
-        body="DEAR DOC,\n\n The mediacl report of pateint\n\n"+Name.get()+"     \nage:" +str(age.get())+ "\ncontact no: "+ str(number.get())+"\n\n with Syptoms\n\n"+ Symptom1.get()+" , " + Symptom2.get()+" , "+Symptom3.get()+"\n\n vital readings --->\n\n temp:no reading\nblood oxy: no reading\n heart rate: no reading \n respiratory rate:  "+str(resprate.get()) +" \n Blood pressure : "+ str(bp.get()) +"\n\n\n possible disease :" + disease_p +"\n\n\n additional details from patient : "+ details.get() +"\n\n\n please dont reply"
+        body="DEAR DOC,\n\n The mediacl report of pateint\n\n"+Name.get()+"     \nage:" +str(age.get())+ "\ncontact no: "+ str(number.get())+"\n\n with Syptoms\n\n"+ Symptom1.get()+" , " + Symptom2.get()+" , "+Symptom3.get()+"\n\n vital readings --->\n\n temp:no reading\nblood oxy: no reading\n heart rate: no reading \n respiratory rate:  "+str(resprate.get()) +" \n Blood pressure : "+ str(bp.get()) +"\n\n\n possible disease :" + disease_p +"\n\n\n additional details from patient : "+ details.get() +"\n\n\n" +"\n\n\n please dont reply"
 
         msg=f'subject: {subject}\n\n{body}'
 
