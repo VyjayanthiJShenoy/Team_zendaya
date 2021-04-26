@@ -6,6 +6,7 @@ from tkinter import ttk
 import urllib.request
 import re
 import requests
+import json
 # from gui_stuff import *
 
 l1=['back_pain','constipation','abdominal_pain','diarrhoea','mild_fever','yellow_urine',
@@ -114,7 +115,7 @@ def cloude(disease_p):
     
     
 
-    body="Dear Doc, "+ doctor_name.get() +"\n\nThe medical report of pateint\n\n"+Name.get()+"     \nage:" +str(age.get())+ "\ncontact no: "+ str(number.get())+"\n\nwith Syptoms\n\n"+ Symptom1.get()+" , " + Symptom2.get()+" , "+Symptom3.get()+"\n\nvital readings --->\n\n temp: no reading\n blood oxy: no reading\n heart rate: no reading \n respiratory rate:  "+str(resprate.get()) +" \n Blood pressure : "+ str(bp.get()) +"\n\n\npossible disease :" + disease_p +"\n\n\nadditional details from patient : "+ details.get() +"\n\n\n" +"\n\n\n please contact the patient @ " +number.get()
+    body="Dear Doc, "+ doctor_name.get() +"\n\nThe medical report of pateint\n\n"+Name.get()+"     \nage:" +str(age.get())+ "\ncontact no: "+ str(number.get())+"\n\nwith Syptoms\n\n"+ Symptom1.get()+" , " + Symptom2.get()+" , "+Symptom3.get()+"\n\nvital readings --->\n\n temp: "+ str(vital_temp) + "\n blood oxy: "+ vital_bloodoxy +"\n heart rate: " +vital_bpm + "\n respiratory rate:  "+str(resprate.get()) +" \n Blood pressure : "+ str(bp.get()) +"\n\n\npossible disease :" + disease_p +"\n\n\nadditional details from patient : "+ details.get() +"\n\n\n" +"\n\n\n please contact the patient @ " +number.get()
     url_req ="https://api.telegram.org/bot"+ token+"/sendMessage"+"?chat_id="+chat_id +"&text="+body
 
     result=requests.get(url_req)
@@ -193,6 +194,13 @@ details=StringVar()
 resprate=IntVar()
 bp=IntVar()
 
+
+datafromwebsite=urllib.request.urlopen("https://api.thingspeak.com/channels/526585/feeds.json?results=1")
+json_data =json.loads(datafromwebsite.read())
+vital_temp=json_data["feeds"][0]["field1"]
+vital_bpm=json_data["feeds"][0]["field2"]
+vital_bloodoxy =json_data["feeds"][0]["field3"]
+
 # Heading
 w2 = Label(root, justify=LEFT, text="Team Zendaya", fg="white", bg="green")
 w2.config(font=("Elephant", 20))
@@ -218,15 +226,15 @@ w8 = Label(root,  text="vitals:", fg="white", bg="green")
 w8.config(font=("Aharoni", 10))
 w8.grid(row=9, column=2, columnspan=2, padx=100)
 
-w9 = Label(root,  text=" bloode oxylevel :"+ str(0), fg="white", bg="green")
+w9 = Label(root,  text=" bloode oxylevel :"+ str(vital_bloodoxy), fg="white", bg="green")
 w9.config(font=("Aharoni", 10))
 w9.grid(row=10, column=2, columnspan=2, padx=100)
 
-w10 = Label(root,  text=" temp :"+ str(0), fg="white", bg="green")
+w10 = Label(root,  text=" temp :"+ str(vital_temp), fg="white", bg="green")
 w10.config(font=("Aharoni", 10))
 w10.grid(row=11, column=2, columnspan=2, padx=100)
 
-w11 = Label(root,  text=" heartrate :"+ str(0), fg="white", bg="green")
+w11 = Label(root,  text=" heartrate :"+ str(vital_bpm), fg="white", bg="green")
 w11.config(font=("Aharoni", 10))
 w11.grid(row=12, column=2, columnspan=2, padx=100)
 

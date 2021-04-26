@@ -5,6 +5,7 @@ import smtplib
 from tkinter import ttk
 import urllib.request
 import re
+import json
 # from gui_stuff import *
 
 l1=['back_pain','constipation','abdominal_pain','diarrhoea','mild_fever','yellow_urine',
@@ -78,6 +79,8 @@ tr.replace({'prognosis':{'Fungal infection':0,'Allergy':1,'GERD':2,'Chronic chol
 X_test= tr[l1]
 y_test = tr[["prognosis"]]
 np.ravel(y_test)
+
+
 # ------------------------------------------------------------------------------------------------------
 
 def cloude(disease_p):
@@ -120,8 +123,7 @@ def cloude(disease_p):
 
         smtp.sendmail('rahulraghuk@gmail.com',email_id,msg)
 
-def vital():
-    oxylvl=0
+
 
 
 
@@ -174,7 +176,6 @@ def DecisionTree():
 
 root = Tk()
 root.configure(background='green')
-
 # entry variables
 Symptom1 = StringVar()
 Symptom1.set(None)
@@ -190,6 +191,12 @@ number=StringVar()
 details=StringVar()
 resprate=IntVar()
 bp=IntVar()
+
+datafromwebsite=urllib.request.urlopen("https://api.thingspeak.com/channels/526585/feeds.json?results=1")
+json_data =json.loads(datafromwebsite.read())
+vital_temp=json_data["feeds"][0]["field1"]
+vital_bpm=json_data["feeds"][0]["field2"]
+vital_bloodoxy =json_data["feeds"][0]["field3"]
 
 # Heading
 w2 = Label(root, justify=LEFT, text="Team Zendaya", fg="white", bg="green")
@@ -216,15 +223,15 @@ w8 = Label(root,  text="vitals:", fg="white", bg="green")
 w8.config(font=("Aharoni", 10))
 w8.grid(row=9, column=2, columnspan=2, padx=100)
 
-w9 = Label(root,  text=" bloode oxylevel :"+ str(0), fg="white", bg="green")
+w9 = Label(root,  text=" bloode oxylevel :"+ str(vital_bloodoxy), fg="white", bg="green")
 w9.config(font=("Aharoni", 10))
 w9.grid(row=10, column=2, columnspan=2, padx=100)
 
-w10 = Label(root,  text=" temp :"+ str(0), fg="white", bg="green")
+w10 = Label(root,  text=" temp :"+ str(vital_temp), fg="white", bg="green")
 w10.config(font=("Aharoni", 10))
 w10.grid(row=11, column=2, columnspan=2, padx=100)
 
-w11 = Label(root,  text=" heartrate :"+ str(0), fg="white", bg="green")
+w11 = Label(root,  text=" heartrate :"+ str(vital_bpm), fg="white", bg="green")
 w11.config(font=("Aharoni", 10))
 w11.grid(row=12, column=2, columnspan=2, padx=100)
 
